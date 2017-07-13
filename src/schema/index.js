@@ -1,4 +1,5 @@
 const {makeExecutableSchema} = require('graphql-tools');
+const resolvers = require('./resolvers');
 
 // Define your types here.
 const typeDefs = `
@@ -8,10 +9,14 @@ const typeDefs = `
     description: String!
   }
 
+  type Mutation {
+    createLink(url: String!, description: String!): Link
+  }
+
   type Query {
     allLinks: [Link!]!
   }
 `;
 
 // Generate the schema object from your types definition.
-module.exports = makeExecutableSchema({typeDefs});
+module.exports = makeExecutableSchema({typeDefs, resolvers});
